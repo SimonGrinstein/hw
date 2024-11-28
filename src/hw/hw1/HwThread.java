@@ -4,9 +4,10 @@ public class HwThread  extends Thread{
 
     @Override
     public void run() {
-        for (int i = 0; i < 1_000_000; i++) {
-            Hw1.incrementCounter();
+        for (int i = 1_000_000; i <= 2_000_000; i++) {
+            if(i % 21 == 0 && String.valueOf(i).contains("3")){
+                Hw1.incrementCounter();
+            }
         }
-        System.out.println(Thread.currentThread().getName() + " end!");
     }
 }
