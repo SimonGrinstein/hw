@@ -8,13 +8,25 @@ package hw.hw1;
 */
 
 public class Hw1 {
-    private static int counter = 0;
 
-    public static synchronized void incrementCounter() {
-        counter++;
+
+    private static int counterWithThread = 0;
+
+    public static synchronized void incrementCounterInThread() {
+        counterWithThread++;
     }
 
     public static void main(String[] args) {
+
+        int counterNoThread = 0;
+
+        for (int i = 0; i <= 2_000_000; i++) {
+            if(i % 21 == 0 && String.valueOf(i).contains("3")){
+                //System.out.println("i = " + i);
+                counterNoThread++;
+            }
+        }
+        System.out.println("counterNoThread = " + counterNoThread);
 
         HwThread hwThread = new HwThread();
         hwThread.start();
@@ -22,7 +34,7 @@ public class Hw1 {
         for (int i = 0; i < 1_000_000; i++) {
             if(i % 21 == 0 && String.valueOf(i).contains("3")){
                 //System.out.println("i = " + i);
-                incrementCounter();
+                incrementCounterInThread();
             }
         }
 
@@ -32,6 +44,6 @@ public class Hw1 {
             throw new RuntimeException(e);
         }
 
-        System.out.println("counter = " + counter);
+        System.out.println("counterWithThread = " + counterWithThread);
     }
 }

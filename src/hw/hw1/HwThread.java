@@ -6,7 +6,7 @@ public class HwThread  extends Thread{
     public void run() {
         for (int i = 1_000_000; i <= 2_000_000; i++) {
             if(i % 21 == 0 && String.valueOf(i).contains("3")){
-                Hw1.incrementCounter();
+                Hw1.incrementCounterInThread();
             }
         }
     }
