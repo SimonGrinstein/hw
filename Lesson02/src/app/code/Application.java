@@ -31,7 +31,7 @@ public class Application {
         director.setProductionChef(productionChef);
         director.setSalesChef(salesChef);
 
-        director.manegeCompany();
+        director.manageCompany();
 
     }
 }

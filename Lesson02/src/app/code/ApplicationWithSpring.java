@@ -25,6 +25,6 @@ public class ApplicationWithSpring {
 
         AbstractApplicationContext context = new AnnotationConfigApplicationContext("app.config");
         Director director = context.getBean(Director.class);
-        director.manegeCompany();
+        director.manageCompany();
     }
 }

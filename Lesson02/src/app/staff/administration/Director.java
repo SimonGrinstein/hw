@@ -3,7 +3,14 @@ package app.staff.administration;
 import app.staff.specialist.Secretary;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * @author Sergey Bugaenko
+ * {@code @date} 29.11.2024
+ */
+
 public class Director {
+    // Аннотация говорит Spring что нужно достать из SpringContext
+    // объект ProductionChef и поместить его в это поле
     @Autowired
     private ProductionChef productionChef;
     @Autowired
@@ -11,12 +18,12 @@ public class Director {
     @Autowired
     private Secretary secretary;
 
-
-    public void manegeCompany() {
+    public void manageCompany() {
         secretary.work();
-        salesChef.giveOrders();
         productionChef.giveOrders();
+        salesChef.giveOrders();
     }
+
 
     public ProductionChef getProductionChef() {
         return productionChef;
