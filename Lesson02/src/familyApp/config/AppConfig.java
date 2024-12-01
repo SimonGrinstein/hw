@@ -1,11 +1,10 @@
 package familyApp.config;
 
-import familyApp.family.parents.Father;
 import familyApp.family.parents.Grandfather;
+import familyApp.family.parents.Father;
 import familyApp.family.parents.Mother;
 import familyApp.family.children.Son;
 import familyApp.family.children.Daughter;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
