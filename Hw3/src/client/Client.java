@@ -12,7 +12,7 @@ public class Client {
 
         CatController controller = (CatController) context.getBean(CatController.class);
 
-        Cat cat = controller.getById(1);
+        Cat cat = controller.getById(5);
         System.out.println(cat);
         System.out.println("Article: " + cat.getArticle());
 
