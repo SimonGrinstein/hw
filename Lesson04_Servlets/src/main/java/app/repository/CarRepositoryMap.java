@@ -44,7 +44,7 @@ public class CarRepositoryMap implements CarRepository {
     public Car updatePriceCar(Long id, BigDecimal price) {
         Car car = findById(id);
         car.setPrice(price);
-        return null;
+        return car;
     }
 
     @Override
