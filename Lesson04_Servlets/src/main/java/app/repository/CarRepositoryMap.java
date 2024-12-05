@@ -48,24 +48,19 @@ public class CarRepositoryMap implements CarRepository {
     }
 
     @Override
-    public Car updateCar(Long id, String brand, BigDecimal price, int year) {
-        Car car = findById(id);
-        car.setBrand(brand);
-        car.setPrice(price);
-        car.setYear(year);
+    public Car update(Car car) {
 
         return car;
     }
 
     @Override
-    public Car deleteCar(Long id) {
+    public void deleteById(Long id) {
 
         Car delCar = findById(id);
 
         if (delCar != null) {
             database.remove(id);
         }
-        return delCar;
     }
 
 

@@ -14,10 +14,10 @@ public interface CarRepository {
 
     Car findById(Long id);
 
-    Car updateCar(Long id, String brand, BigDecimal price, int year);
+    Car update(Car car);
 
     Car updatePriceCar(Long id, BigDecimal price);
 
-    Car deleteCar(Long id);
+    void deleteById(Long id);
 
 }
