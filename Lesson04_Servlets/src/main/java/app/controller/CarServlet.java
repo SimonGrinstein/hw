@@ -3,6 +3,7 @@ package app.controller;
 import app.model.Car;
 import app.repository.CarRepository;
 import app.repository.CarRepositoryDB;
+import app.repository.CarRepositoryHibernate;
 import app.repository.CarRepositoryMap;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,8 @@ import java.util.Map;
 public class CarServlet extends HttpServlet {
 
     //private CarRepository repository = new CarRepositoryMap();//ispoljziem MAP
-    private CarRepository repository = new CarRepositoryDB(); //ispoljziem DB
+    //private CarRepository repository = new CarRepositoryDB(); //ispoljziem DB
+    private CarRepository repository = new CarRepositoryHibernate();
     private ObjectMapper mapper = new ObjectMapper();
 
     // GET http://10.2.3.4:8080/cars
@@ -80,6 +82,10 @@ public class CarServlet extends HttpServlet {
 
         //Json iz zaprosa -> v java object (ispoljzuem JACKSON)
         Car car = mapper.readValue(request.getReader(), Car.class);
+
+        //comenty
+        //System.out.println(car.getBrand());
+        //System.out.println("POST --- : " + car);
 
         car = repository.save(car);
 

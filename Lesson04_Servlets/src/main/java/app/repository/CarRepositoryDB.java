@@ -28,7 +28,7 @@ public class CarRepositoryDB implements CarRepository {
             throw new RuntimeException(e);
         }
         //CONSOLE
-        //docker run --name postgres49 -p 5432:5432 -e POSTGRES_USER=my_user -e POSTGRES_PASSWORD=pos1234 -e POSTGRES_DB=g_49_cars -d postgres
+        //docker run --name postgres49 -p 5433:5432 -e POSTGRES_USER=my_user -e POSTGRES_PASSWORD=pos1234 -e POSTGRES_DB=g_49_cars -d postgres
     }
 
     @Override
@@ -41,11 +41,15 @@ public class CarRepositoryDB implements CarRepository {
                     car.getBrand(), car.getPrice(), car.getYear());
 
             Statement statement = connection.createStatement();
-            statement.execute(query);
+            //statement.execute(query);
+
+            statement.execute(query, Statement.RETURN_GENERATED_KEYS);
 
             ResultSet resultSet = statement.getGeneratedKeys();
+
             resultSet.next();
-            Long id = resultSet.getLong(1);
+            //Long id = resultSet.getLong(1);
+            Long id = resultSet.getLong("id");
             car.setId(id);
 
             return car;
@@ -72,6 +76,7 @@ public class CarRepositoryDB implements CarRepository {
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 Car car = new Car();
+                car.setId(resultSet.getLong("id"));
                 car.setBrand(resultSet.getString("brand"));
                 car.setPrice(resultSet.getBigDecimal("price"));
                 car.setYear(resultSet.getInt("year"));
@@ -97,14 +102,14 @@ public class CarRepositoryDB implements CarRepository {
             statement.execute(query);
 
             ResultSet resultSet = statement.executeQuery(query);
-            resultSet.next();
+            if(resultSet.next()){
+                String brand = resultSet.getString("brand");
+                BigDecimal price = resultSet.getBigDecimal("price");
+                int year = resultSet.getInt("year");
+                return new Car(id, brand, price, year);
+            }
 
-            String brand = resultSet.getString("brand");
-            BigDecimal price = resultSet.getBigDecimal("price");
-            int year = resultSet.getInt("year");
-
-            return new Car(id, brand, price, year);
-
+            return null;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
