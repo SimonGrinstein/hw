@@ -5,11 +5,10 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
+    <!--- Delete     -->
+    <changeSet id="drop-column-cart-id" author="SimonG">
+        <dropColumn tableName="consumer" columnName="cart_id"/>
 
-    <include file="v0.1.0/changelog.xml" relativeToChangelogFile="true"/>
-    <include file="v0.2.0/changelog.xml" relativeToChangelogFile="true"/>
-
-    <include file="v0.2.2/changelog.xml" relativeToChangelogFile="true"/>
-
+    </changeSet>
 
 </databaseChangeLog>
