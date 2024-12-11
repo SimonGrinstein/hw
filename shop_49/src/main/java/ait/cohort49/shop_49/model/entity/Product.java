@@ -1,14 +1,26 @@
 package ait.cohort49.shop_49.model.entity;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@Entity
+@Table(name = "product")
 public class Product {
+    @Id  //Главный ключ
+    @Column(name = "id") //Связывает поля класса с колонкой в БД
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "price")
     private BigDecimal price;
+    @Column
     private boolean active;
 
+    public Product() {
+    }
 
     public void setId(Long id) {
         this.id = id;

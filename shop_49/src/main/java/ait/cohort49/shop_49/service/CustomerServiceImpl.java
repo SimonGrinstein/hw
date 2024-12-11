@@ -1,54 +1,64 @@
 package ait.cohort49.shop_49.service;
 
 import ait.cohort49.shop_49.model.entity.Customer;
-import ait.cohort49.shop_49.repository.CustomerRepositoryHibernate;
+import ait.cohort49.shop_49.repository.CustomerRepository;
+import ait.cohort49.shop_49.service.interfaces.CustomerService;
 
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
 
-    private CustomerRepositoryHibernate customerRepositoryHibernate = new CustomerRepositoryHibernate();
+    private final CustomerRepository repository;
+
+    public CustomerServiceImpl(CustomerRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        return customerRepositoryHibernate.saveCustomer(customer);
-        //return customer;
+        customer.setActive(true);
+        return repository.save(customer);
     }
 
     @Override
     public List<Customer> findAllCustomer() {
-        return customerRepositoryHibernate.findAllCustomer();
-        //return List.of();
+        return repository.findAll().stream()
+                .filter(Customer::isActive)
+                .toList();
     }
 
     @Override
     public Customer findCustomerById(Long id) {
-        return customerRepositoryHibernate.findCustomerById(id);
-        //return null;
+        Customer customer = repository.findById(id).orElse(null);
+        if (customer == null  || customer.isActive()) {
+            return null;
+        }
+        return customer;
     }
 
     @Override
     public Customer updateCustomer(Long id, Customer customer) {
-        return customerRepositoryHibernate.updateCustomer(id, customer);
-        //return null;
+        //return repository.updateCustomer(id, customer);
+        return null;
     }
 
     @Override
     public Customer deleteCustomer(Long id) {
-        return customerRepositoryHibernate.deleteCustomer(id);
-        //return null;
+
+        //return repository.deleteCustomer(id);
+        return null;
     }
 
     @Override
     public Customer deleteCustomer(String name) {
-        return customerRepositoryHibernate.deleteCustomer(name);
-        //return null;
+        //return repository.deleteCustomer(name);
+        return null;
     }
 
     @Override
     public Customer restoreCustomer(Long id) {
-        return customerRepositoryHibernate.restoreCustomer(id);
-        //return null;
+        //return repository.restoreCustomer(id);
+        return null;
     }
 
     @Override

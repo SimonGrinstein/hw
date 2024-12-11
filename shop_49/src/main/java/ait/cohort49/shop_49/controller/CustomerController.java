@@ -1,7 +1,7 @@
 package ait.cohort49.shop_49.controller;
 
 import ait.cohort49.shop_49.model.entity.Customer;
-import ait.cohort49.shop_49.service.CustomerServiceImpl;
+import ait.cohort49.shop_49.service.interfaces.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,7 +9,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
-    private CustomerServiceImpl customerService = new CustomerServiceImpl();
+    private final CustomerService customerService;
+
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
 
     @PostMapping
     public Customer saveCustomer(@RequestBody Customer customer) {
@@ -26,29 +31,29 @@ public class CustomerController {
         return customerService.findAllCustomer();
     }
 
-    /*
-    @GetMapping
+
+    @GetMapping("/count")
     public int getCustomerCount() {
         return customerService.getCustomerCount();
     }
-*/
+
 
     @PutMapping("/{id}")
     public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
         return customerService.updateCustomer(id, customer);
     }
-/*
-    @PutMapping("/{id}")
+
+    @PutMapping("/restore/{id}")
     public Customer restoreCustomer(@PathVariable Long id) {
         return customerService.restoreCustomer(id);
     }
-*/
+
     @DeleteMapping("/{id}")
     public Customer removeCustomer(@PathVariable Long id) {
         return customerService.deleteCustomer(id);
     }
 
-    @DeleteMapping("/{name}")
+    @DeleteMapping("/by_name/{name}")
     public Customer removeCustomer(@PathVariable String name) {
         return customerService.deleteCustomer(name);
     }

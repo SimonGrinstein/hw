@@ -1,8 +1,10 @@
 package ait.cohort49.shop_49.controller;
 
 import ait.cohort49.shop_49.model.entity.Product;
+import ait.cohort49.shop_49.service.interfaces.ProductService;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 //http://localhost:8080/products
@@ -12,53 +14,63 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
+    private final ProductService productService;
+
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
     //POST -> /products
     @PostMapping
     public Product saveProduct(@RequestBody Product product) {
-        //Todo  -> Service
-        return product;
+        return productService.save(product);
     }
 
     //Product - id
     //GET /products/3
     @GetMapping("/{id}")
     public Product getById(@PathVariable Long id) {
-        //Todo -> service
-        return null;
+        return productService.findById(id);
     }
 
     //GET /products
     @GetMapping
     public List<Product> getAll() {
-        //GET
-        // TODO -> Sevice
-        return List.of();
+        return productService.findAllActiveProducts();
     }
 
-    /*
-    // get:  GET /products
-    @GetMapping
-    public List<Product> getAll(@RequestParam(required = false) Integer limit) {
-        // Todo обращаемся к сервису, получаем все продукты
-        if (limit == null) {
-            // параметр не пришел
-        }
-        return List.of();
+    @GetMapping("/count")
+    public Long getProductCount() {
+        return productService.getProductCount();
     }
-    */
 
-    //Update PUT -> /product
-    @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        //Todo -> Service
-        return product;
+    @GetMapping("/total_price")
+    public BigDecimal getTotalPrice() {
+        return productService.getTotalPrice();
+    }
+
+    @GetMapping("/average_price")
+    public BigDecimal getAveragePrice() {
+        return productService.getAveragePrice();
+    }
+
+    @PutMapping ("/restore{id}")
+    public Product restoreProduct(@PathVariable Long id) {
+        return productService.restoreProductById(id);
     }
 
     //delete DELETE -> /product/id
     @DeleteMapping("/{id}")
     public Product remove(@PathVariable Long id) {
-        //Todo -> Service
-        return null;
+        return productService.deleteById(id);
     }
+
+    //delete DELETE -> /product/id
+    @DeleteMapping("/by_title/{name}")
+    public Product remove(@PathVariable String name) {
+        return productService.deleteByName(name);
+    }
+
+
 
 }
