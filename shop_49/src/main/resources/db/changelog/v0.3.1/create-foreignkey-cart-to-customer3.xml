@@ -5,11 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
-    <changeSet id="create-foreignkey-cart-to-customer" author="SimonG">
+    <changeSet id="create-foreignkey-cart-to-customer3" author="SimonG">
 
         <addForeignKeyConstraint baseTableName="cart"
                                  baseColumnNames="customer_id"
-                                 constraintName="fk_cart_customer"
+                                 constraintName="fk_cart_customer3"
                                  referencedTableName="customer"
                                  referencedColumnNames="id" />
 

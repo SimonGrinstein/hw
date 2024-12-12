@@ -9,6 +9,6 @@
         <tagDatabase tag="v.0.3.1"/>
     </changeSet>
 
-    <include file="create-foreignkey-cart-to-customer.xml" relativeToChangelogFile="true"/>
+    <include file="create-foreignkey-cart-to-customer3.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

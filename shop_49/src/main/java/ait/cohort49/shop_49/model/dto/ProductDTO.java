@@ -1,4 +1,4 @@
-package ait.cohort49.shop_49.model.entity;
+package ait.cohort49.shop_49.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -6,27 +6,23 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
-@Table(name = "product")
-@Schema(description = "Class Product")
-public class Product {
+
+@Schema(description = "Class ProductDTO")
+public class ProductDTO {
 
     @Schema(description = "Unique ID", example = "15", accessMode = Schema.AccessMode.READ_ONLY)
     @Id  //Главный ключ
-    @Column(name = "id") //Связывает поля класса с колонкой в БД
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Schema(description = "Title", example = "Banana")
-    @Column(name = "title")
-    private String title;
-    @Schema(description = "Price", example = "8.55")
-    @Column(name = "price")
-    private BigDecimal price;
-    @Schema(description = "isActive", accessMode = Schema.AccessMode.READ_ONLY)
-    @Column
-    private boolean active;
 
-    public Product() {
+    @Schema(description = "Title", example = "Banana")
+    private String title;
+
+    @Schema(description = "Price", example = "8.55")
+    private BigDecimal price;
+
+
+    public ProductDTO() {
     }
 
     public void setId(Long id) {
@@ -41,10 +37,6 @@ public class Product {
         this.price = price;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     public Long getId() {
         return id;
     }
@@ -57,15 +49,12 @@ public class Product {
         return price;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
     @Override
     public final boolean equals(Object o) {
-        if (!(o instanceof Product product)) return false;
+        if (!(o instanceof ProductDTO)) return false;
 
-        return active == product.active && Objects.equals(id, product.id) && Objects.equals(title, product.title) && Objects.equals(price, product.price);
+        ProductDTO that = (ProductDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(price, that.price);
     }
 
     @Override
@@ -73,13 +62,12 @@ public class Product {
         int result = Objects.hashCode(id);
         result = 31 * result + Objects.hashCode(title);
         result = 31 * result + Objects.hashCode(price);
-        result = 31 * result + Boolean.hashCode(active);
         return result;
     }
 
     @Override
     public String toString() {
-        return String.format("Product: id - %d, title - %s, price - %s, active - %s",
-                id, title, price, active ? "yes" : "no");
+        return String.format("Product: id - %d, title - %s, price - %s",
+                id, title, price);
     }
 }

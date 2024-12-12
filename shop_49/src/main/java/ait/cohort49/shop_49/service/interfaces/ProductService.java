@@ -1,21 +1,19 @@
 package ait.cohort49.shop_49.service.interfaces;
 
-import ait.cohort49.shop_49.model.entity.Product;
-import org.springframework.stereotype.Service;
+import ait.cohort49.shop_49.model.dto.ProductDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Service
 public interface ProductService {
 
-    Product save(Product product);
+    ProductDTO save(ProductDTO productDTO);
 
-    List<Product> findAllActiveProducts();
+    List<ProductDTO> findAllActiveProducts();
 
-    Product findById(long id);
+    ProductDTO findById(long id);
 
-    Product updateProduct(Long id, Product product);
+    ProductDTO updateProduct(Long id, ProductDTO productDTO);
 
     Long getProductCount();
 
@@ -23,9 +21,9 @@ public interface ProductService {
 
     BigDecimal getAveragePrice();
 
-    Product restoreProductById(long id);
+    ProductDTO restoreProductById(long id);
 
-    Product deleteById(Long id);
+    ProductDTO deleteById(Long id);
 
-    Product deleteByName(String name);
+    ProductDTO deleteByName(String name);
 }

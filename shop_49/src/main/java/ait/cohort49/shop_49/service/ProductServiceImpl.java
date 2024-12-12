@@ -1,45 +1,52 @@
 package ait.cohort49.shop_49.service;
 
+import ait.cohort49.shop_49.model.dto.ProductDTO;
 import ait.cohort49.shop_49.model.entity.Product;
 import ait.cohort49.shop_49.repository.ProductRepository;
 import ait.cohort49.shop_49.service.interfaces.ProductService;
+import ait.cohort49.shop_49.service.mapping.ProductMappingService;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Service
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository repository;
+    private final ProductMappingService mappingService;
 
-    public ProductServiceImpl(ProductRepository repository) {
+    public ProductServiceImpl(ProductRepository repository, ProductMappingService mappingService) {
         this.repository = repository;
+        this.mappingService = mappingService;
     }
 
     @Override
-    public Product save(Product product) {
+    public ProductDTO save(ProductDTO productDTO) {
+        Product product = mappingService.mapDtoToEntity(productDTO);
         product.setActive(true);
-        return repository.save(product);
+        return mappingService.mapEntityToDto(repository.save(product));
     }
 
     @Override
-    public List<Product> findAllActiveProducts() {
+    public List<ProductDTO> findAllActiveProducts() {
         return repository.findAll().stream()
                 .filter(Product::isActive)
+                .map(mappingService::mapEntityToDto)
                 .toList();
-                //.collect(Collectors.toList());
     }
 
     @Override
-    public Product findById(long id) {
+    public ProductDTO findById(long id) {
         Product product = repository.findById(id).orElse(null);
         if(product == null || product.isActive()) {
             return null;
         }
-        return product;
+        return mappingService.mapEntityToDto(product);
     }
 
     @Override
-    public Product updateProduct(Long id, Product product) {
+    public ProductDTO updateProduct(Long id, ProductDTO product) {
         return null;
     }
 
@@ -59,17 +66,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product restoreProductById(long id) {
+    public ProductDTO restoreProductById(long id) {
         return null;
     }
 
     @Override
-    public Product deleteById(Long id) {
+    public ProductDTO deleteById(Long id) {
         return null;
     }
 
     @Override
-    public Product deleteByName(String name) {
+    public ProductDTO deleteByName(String name) {
         return null;
     }
 }

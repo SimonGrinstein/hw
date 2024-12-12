@@ -1,20 +1,30 @@
 package ait.cohort49.shop_49.model.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "customer")
+@Schema(description = "Class Customer")
 public class Customer {
+    @Schema(description = "Unique ID", example = "15", accessMode = Schema.AccessMode.READ_ONLY)
     @Id  //Главный ключ
     @Column(name = "id") //Связывает поля класса с колонкой в БД
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Schema(description = "Name", example = "Simon")
     @Column
     private String name;
+
+    @Schema(description = "isActive", accessMode = Schema.AccessMode.READ_ONLY)
     @Column
     private boolean active;
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.PERSIST)
+    private Cart cart;
 
     public Customer() {
     }
