@@ -15,7 +15,7 @@ public class Cart {
     @Column(name = "id")
     private Long id;
 
-    //@JsonIgnore
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
@@ -41,6 +41,14 @@ public class Cart {
         int result = Objects.hashCode(id);
         result = 31 * result + Objects.hashCode(customer);
         return result;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Long getId() {
