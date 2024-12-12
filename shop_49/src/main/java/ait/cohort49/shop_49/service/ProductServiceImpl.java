@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO findById(long id) {
         Product product = repository.findById(id).orElse(null);
-        if(product == null || product.isActive()) {
+        if(product == null || !product.isActive()) {
             return null;
         }
         return mappingService.mapEntityToDto(product);

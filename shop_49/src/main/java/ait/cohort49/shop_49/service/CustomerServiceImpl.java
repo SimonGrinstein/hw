@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO findCustomerById(Long id) {
         Customer customer = repository.findById(id).orElse(null);
-        if (customer == null  || customer.isActive()) {
+        if (customer == null  || !customer.isActive()) {
             return null;
         }
         return mappingService.mapEntityToDto(customer);

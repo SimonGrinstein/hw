@@ -47,6 +47,7 @@ public class ProductController {
             @Parameter(description = "The id that needs to be fetched", required = true)
             @PathVariable("productId")
             Long id) {
+
         return productService.findById(id);
     }
 
