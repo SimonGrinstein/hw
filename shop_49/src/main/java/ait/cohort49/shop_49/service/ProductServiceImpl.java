@@ -30,10 +30,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDTO> findAllActiveProducts() {
-        return repository.findAll().stream()
-                .filter(Product::isActive)
+        return repository.findByActiveTrue().stream()
                 .map(mappingService::mapEntityToDto)
                 .toList();
+
+//        return repository.findAll().stream()
+//                .filter(Product::isActive)
+//                .map(mappingService::mapEntityToDto)
+//                .toList();
     }
 
     @Override

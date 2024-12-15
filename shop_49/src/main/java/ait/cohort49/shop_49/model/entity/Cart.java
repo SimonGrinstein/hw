@@ -1,6 +1,4 @@
 package ait.cohort49.shop_49.model.entity;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -9,11 +7,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "cart")
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
 
     @JsonIgnore
     @OneToOne
@@ -23,10 +21,23 @@ public class Cart {
 
     @Override
     public String toString() {
-        return "Cart{" +
-                "id=" + id +
-                ", customer=" + customer +
-                '}';
+        return String.format("Cart: id - %d", this.id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override
@@ -41,21 +52,5 @@ public class Cart {
         int result = Objects.hashCode(id);
         result = 31 * result + Objects.hashCode(customer);
         return result;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

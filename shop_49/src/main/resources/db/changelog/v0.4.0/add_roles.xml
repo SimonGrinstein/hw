@@ -5,10 +5,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
-    <changeSet id="add-tag-0.3.1" author="SimonG">
-        <tagDatabase tag="v.0.3.1"/>
+    <changeSet id="add_roles" author="SimonG">
+
+        <insert tableName="role">
+            <column name="title" value="ROLE_ADMIN" />
+        </insert>
+
+        <insert tableName="role">
+            <column name="title" value="ROLE_USER" />
+        </insert>
+
     </changeSet>
 
-    <include file="create-foreignkey-cart-to-customer3.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

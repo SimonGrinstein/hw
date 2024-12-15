@@ -61,9 +61,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO deleteCustomer(Long id) {
-
-        //return repository.deleteCustomer(id);
-        return null;
+        CustomerDTO customerDTO = findCustomerById(id);
+        if (customerDTO == null) {
+            return null;
+        }
+        Customer customer = mappingService.mapDtoToEntity(customerDTO);
+        customer.setActive(false);
+        return customerDTO;
     }
 
     @Override
@@ -74,8 +78,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO restoreCustomer(Long id) {
-        //return repository.restoreCustomer(id);
-        return null;
+        CustomerDTO customerDTO = findCustomerById(id);
+        if (customerDTO == null) {
+            return null;
+        }
+        Customer customer = mappingService.mapDtoToEntity(customerDTO);
+        customer.setActive(true);
+        return customerDTO;
     }
 
     @Override

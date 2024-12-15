@@ -44,6 +44,7 @@ public class CustomerController {
 
     @GetMapping
     public List<CustomerDTO> getAll() {
+        //System.out.println("getAll size ------------------ " + customerService.findAllCustomer().size());
         return customerService.findAllCustomer();
     }
 
@@ -56,6 +57,10 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     public CustomerDTO updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO) {
+//        System.out.println("ID: "+ id);
+//        System.out.println("customerDTO: "+ customerDTO.toString());
+//        CustomerDTO customerDTO2 = customerService.updateCustomer(id, customerDTO);
+//        System.out.println("customerDTO2: "+ customerDTO2.toString());
         return customerService.updateCustomer(id, customerDTO);
     }
 
