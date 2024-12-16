@@ -12,7 +12,7 @@ import ait.cohort49.shop_49.service.interfaces.UserService;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl{
 
     private final UserRepository repository;
     private final RoleService roleService;
@@ -23,17 +23,15 @@ public class UserServiceImpl implements UserService{
     }
 
 
-    @Override
+
     public void register(User user) {
         repository.save(user);
     }
 
-    @Override
     public List<User> findAll() {
         return repository.findAll();
     }
 
-    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
     }
