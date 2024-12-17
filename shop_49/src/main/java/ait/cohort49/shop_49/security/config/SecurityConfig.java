@@ -33,6 +33,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,  "/products/{id}").authenticated()
                         //.requestMatchers(HttpMethod.GET,  "/products/{id}").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.POST,  "/products").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,  "/customer/count").permitAll()
+                        .requestMatchers(HttpMethod.POST,  "/customer/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST,  "/customer").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,  "/customer").hasRole("ADMIN")
+
 
                 );
 

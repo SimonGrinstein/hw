@@ -1,14 +1,14 @@
 #spring.application.name=shop_49
 #spring.datasource.url=jdbc:postgresql://localhost:5432/g_49_shop
 #spring.datasource.username=my_user
-#spring.datasource.password=pos1234
+#spring.datasource.password=DB_PASS
 #spring.datasource.driver-class-name=org.postgresql.Driver
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/shop_g49
-    username: my_user
-    password: pos1234
+    url: ${DB_URL}localhost:5433/shop_g49
+    username: ${DB_USER}
+    password: ${DB_PASS}
     driver-class-name: org.postgresql.Driver
 
   application:
@@ -25,3 +25,7 @@ spring:
 server:
   servlet:
     context-path: /api
+
+key:
+  access: ${KEY_ACCESS}
+  refresh: ${KEY_REFRESH}

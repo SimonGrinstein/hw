@@ -39,6 +39,9 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public CustomerDTO getById(@PathVariable Long id) {
+//        System.out.println("ID------------------------------------------------" + id);
+//        System.out.println("ID------------------------------------------------" + id);
+//        System.out.println("ID------------------------------------------------" + id);
         return customerService.findCustomerById(id);
     }
 
