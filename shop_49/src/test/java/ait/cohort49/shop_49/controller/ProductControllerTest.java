@@ -137,7 +137,27 @@ class ProductControllerTest {
         adminAccessToken = BEARER_PREFIX + tokenResponse.getAccessToken();
 
 
+
+        //! ---- HW
+        ResponseEntity<TokenResponseDTO> responseUser = template.exchange(
+                authUrl,
+                HttpMethod.POST,
+                request,
+                TokenResponseDTO.class
+        );
+        assertTrue(responseUser.hasBody(), "Authorization response User body is empty");
+
+        TokenResponseDTO tokenResponseUser = responseUser.getBody();
+
+        assert tokenResponseUser != null;
+        userAccessToken = BEARER_PREFIX + tokenResponseUser.getAccessToken();
+
+
     }
+
+
+
+
 
     @Test
     public void test(){
