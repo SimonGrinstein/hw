@@ -19,7 +19,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping
+    @PostMapping("/login")
     public TokenResponseDTO login(@RequestBody LoginRequestDTO loginRequestDTO){
         try {
             return authService.login(loginRequestDTO);
@@ -28,8 +28,8 @@ public class AuthController {
         }
     }
 
-    public  TokenResponseDTO refreshToken(@RequestBody RefreshRequestDTO refreshRequestDTO){
-
+    @PostMapping("/refresh")
+    public TokenResponseDTO refreshToken(@RequestBody RefreshRequestDTO refreshRequestDTO){
         try {
             return authService.refreshAccessToken(refreshRequestDTO.getRefreshToken());
         } catch (Exception e) {
