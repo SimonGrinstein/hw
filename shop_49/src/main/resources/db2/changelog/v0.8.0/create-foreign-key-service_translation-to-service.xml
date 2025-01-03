@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-foreign-key-service_translation-to-service" author="SimonG">
+
+        <addForeignKeyConstraint baseTableName="service_translation"
+                                 baseColumnNames="service_id"
+                                 constraintName="fk_service_translation_service"
+                                 referencedTableName="service"
+                                 referencedColumnNames="id" />
+
+    </changeSet>
+
+
+</databaseChangeLog>

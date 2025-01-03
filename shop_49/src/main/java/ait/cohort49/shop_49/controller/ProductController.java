@@ -1,5 +1,7 @@
 package ait.cohort49.shop_49.controller;
 
+import ait.cohort49.shop_49.exceptionHandling.Response;
+import ait.cohort49.shop_49.exceptionHandling.exception.FirstTestException;
 import ait.cohort49.shop_49.model.dto.ProductDTO;
 import ait.cohort49.shop_49.service.interfaces.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,6 +10,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -31,7 +36,7 @@ public class ProductController {
     //POST -> /products
     @Operation(summary = "Create product", description = "Add new product", tags ={"Product"})
     @PostMapping
-    public ProductDTO saveProduct(@RequestBody ProductDTO productDTO) {
+    public ProductDTO saveProduct(@Valid @RequestBody ProductDTO productDTO) {
         return productService.save(productDTO);
     }
 
@@ -89,6 +94,11 @@ public class ProductController {
         return productService.deleteByName(name);
     }
 
+    @ExceptionHandler(FirstTestException.class)
+    public ResponseEntity<Response> handleException(FirstTestException exception) {
+        Response response = new Response(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 
 
 }

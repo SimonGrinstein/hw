@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-service" author="SimonG">
+        <createTable tableName="service">
+
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="slug" type="varchar(100)">
+            </column>
+
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="contact_phone" type="varchar(20)">
+            </column>
+
+            <column name="contact_email" type="varchar(50)">
+            </column>
+
+            <column name="contact_url" type="varchar(50)">
+            </column>
+
+            <column name="created_at" type="timestamp" autoIncrement="true">
+            </column>
+
+            <column name="updated_at" type="timestamp" autoIncrement="true">
+            </column>
+
+            <column name="is_verified" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="location" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="map_link" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="map_embed_link" type="varchar(100)">
+            </column>
+
+            <column name="map_provider" type="varchar(100)">
+            </column>
+
+            <column name="address" type="varchar(100)">
+            </column>
+
+            <!--  Перенести в отдельную таблицу?????-->
+
+            <column name="price" type="decimal(8,2)">
+            </column>
+
+            <column name="currency" type="varchar(100)">
+            </column>
+
+
+
+
+
+
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>

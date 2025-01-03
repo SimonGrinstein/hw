@@ -1,10 +1,14 @@
 package ait.cohort49.shop_49.service;
 
+import ait.cohort49.shop_49.exceptionHandling.exception.FirstTestException;
+import ait.cohort49.shop_49.exceptionHandling.exception.ThirdTestException;
 import ait.cohort49.shop_49.model.dto.ProductDTO;
 import ait.cohort49.shop_49.model.entity.Product;
 import ait.cohort49.shop_49.repository.ProductRepository;
 import ait.cohort49.shop_49.service.interfaces.ProductService;
 import ait.cohort49.shop_49.service.mapping.ProductMappingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -15,6 +19,8 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository repository;
     private final ProductMappingService mappingService;
+
+    private final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     public ProductServiceImpl(ProductRepository repository, ProductMappingService mappingService) {
         this.repository = repository;
@@ -42,9 +48,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO findById(long id) {
+        //!---------------- LOGGER
+//        logger.info("Method findById called with param: {}", id);
+//        logger.warn("Method findById called with param: {}", id);
+//        logger.error("Method findById called with param: {}", id);
+
+
         Product product = repository.findById(id).orElse(null);
         if(product == null || !product.isActive()) {
-            return null;
+            throw new ThirdTestException("This is 3 Test Exception");
+            //throw new FirstTestException(" This is the FirstTestException");
+            //return null;
         }
         return mappingService.mapEntityToDto(product);
     }

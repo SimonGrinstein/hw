@@ -37,16 +37,17 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)//withDefaults
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers(HttpMethod.POST,"/auth/login" ,"/auth/refresh").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/products").permitAll()
-                        .requestMatchers(HttpMethod.GET,  "/products/{id}").authenticated()
+                                .anyRequest().permitAll()
+//                                .requestMatchers(HttpMethod.POST,"/auth/login" ,"/auth/refresh").permitAll()
+//                                .requestMatchers(HttpMethod.GET, "/products").permitAll()
+                        //!.requestMatchers(HttpMethod.GET,  "/products/{id}").authenticated()
                         //.requestMatchers(HttpMethod.GET,  "/products/{id}").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.POST,  "/products").hasRole("ADMIN")
+                        //!.requestMatchers(HttpMethod.POST,  "/products").hasRole("ADMIN")
                         //.requestMatchers(HttpMethod.GET,  "/customer/count").permitAll()
                         //.requestMatchers(HttpMethod.POST,  "/customer/{id}").permitAll()
                         //.requestMatchers(HttpMethod.POST,  "/customer").hasRole("ADMIN")
                         //.requestMatchers(HttpMethod.GET,  "/customer").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        //!.anyRequest().authenticated()
 
                 );
 
